@@ -1,0 +1,22 @@
+export const people = [ 
+  { name: "Fatima Al-Zahra", title: "Consultant", location: "Bahrain", office: "Abu Dhabi", capability: "Technology" },
+  { name: "Lisa Ray", title: "Manager", location: "United States", office: "Boston", capability: "Healthcare" },
+  { name: "Lucia Gomez", title: "Analyst", location: "Argentina", office: "Chicago", capability: "Corporate" },
+  { name: "Tom Wilson", title: "Analyst", location: "United States", office: "Abu Dhabi", capability: "Technology" },
+  { name: "Layla Hussein", title: "Associate", location: "Bahrain", office: "Atlanta", capability: "Life Sciences" },
+  { name: "Mike Johnson", title: "Associate", location: "United States", office: "Beijing", capability: "Litigation" },
+  { name: "Ingrid Novak", title: "Associate", location: "Austria", office: "Abu Dhabi", capability: "Technology" },
+  { name: "Sophie Müller", title: "Partner", location: "United States", office: "Boston", capability: "Healthcare" },
+  { name: "Chloe Lee", title: "Consultant", location: "Australia", office: "Beijing", capability: "Litigation" },
+  { name: "Emily Carter", title: "Consultant", location: "United States", office: "Atlanta", capability: "Life Sciences" },
+  { name: "Carlos Mendez", title: "Manager", location: "Argentina", office: "Atlanta", capability: "Life Sciences" },
+  { name: "John Smith", title: "Partner", location: "Bahrain", office: "Chicago", capability: "Corporate" },
+  { name: "Felix Bauer", title: "Consultant", location: "Austria", office: "Atlanta", capability: "Life Sciences" },
+  { name: "Maria Lopez", title: "Partner", location: "Austria", office: "Boston", capability: "Healthcare" },
+  { name: "Ahmed Khan", title: "Partner", location: "Australia", office: "Beijing", capability: "Litigation" },
+  { name: "Alex Chen", title: "Partner", location: "Argentina", office: "Beijing", capability: "Technology" },
+  { name: "Ben Wright", title: "Associate", location: "Australia", office: "Chicago", capability: "Corporate" },
+  { name: "Jane Doe", title: "Partner", location: "United States", office: "Chicago", capability: "Corporate" },
+  { name: "Markus Schmidt", title: "Analyst", location: "Austria", office: "Chicago", capability: "Corporate" },
+  { name: "Omar Youssef", title: "Manager", location: "Bahrain", office: "Beijing", capability: "Litigation" }
+];
