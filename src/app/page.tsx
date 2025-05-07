@@ -8,14 +8,15 @@ export default function Page() {
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
 
   return (
-    <div className="flex flex-col md:flex-row px-4 md:pr-8 md:pl-0 py-8">
-      <aside className="w-full md:w-1/4">
+    <div className="flex flex-col md:flex-row gap-6 md:gap-8 px-4 sm:px-6 lg:px-12 py-6">
+      <aside className="w-full md:w-1/3">
         <FilterSidebar
           selectedLocations={selectedLocations}
           setSelectedLocations={setSelectedLocations}
         />
       </aside>
-      <main className="w-full md:w-3/4">
+
+      <main className="w-full md:w-2/3">
         <PeopleInfo selectedLocations={selectedLocations} />
       </main>
     </div>

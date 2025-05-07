@@ -40,7 +40,7 @@ function FilterSection({
             <input
               type="text"
               placeholder="Search"
-              className="w-full border rounded px-2 py-1 mb-2 text-sm focus:outline-none"
+              className="w-[80%] border rounded px-2 py-1 mb-2 focus:outline-none"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
             />
@@ -53,7 +53,7 @@ function FilterSection({
                 checked={selectedLocations.includes(item.label)}
                 onChange={() => handleCheckboxChange(item.label)}
               />
-              <span className="text-sm text-olive-700">{item.label}</span>
+              <span className="text-olive-500">{item.label}</span>
               <span className="text-sm text-gray-600">({item.count})</span>
             </label>
           ))}
@@ -63,12 +63,20 @@ function FilterSection({
   );
 }
 
-export default function FilterSidebar({ selectedLocations, setSelectedLocations }: any) {
+export default function FilterSidebar({
+  selectedLocations,
+  setSelectedLocations,
+}: any) {
   return (
-    <div className="bg-white p-12 shadow rounded w-75">
-      <h2 className="text-xl font-semibold mb-4 text-blue-900">Filter by:</h2>
+    <div className="p-4 md:p-6 md:h-full lg:p-12 bg-gray-100 rounded w-full md:w-64 lg:w-85">
+      <h2 className="text-lg md:text-xl font-semibold mb-4 text-blue-900">
+        Filter by:
+      </h2>
       {filters.map((filter, index) => (
-        <div key={filter.title} className={index !== filters.length - 1 ? "border-b" : ""}>
+        <div
+          key={filter.title}
+          className={index !== filters.length - 1 ? "border-b" : ""}
+        >
           <FilterSection
             title={filter.title}
             items={filter.items}
