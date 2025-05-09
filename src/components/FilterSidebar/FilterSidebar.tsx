@@ -31,7 +31,33 @@ function FilterSection({
         onClick={() => setIsOpen(!isOpen)}
       >
         <h3 className="font-semibold text-lg text-blue-900">{title}</h3>
-        <span>{isOpen ? "-" : "+"}</span>
+        <span>{isOpen ?  <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 15l7-7 7 7"
+              />
+            </svg> : <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>}</span>
       </div>
 
       {isOpen && (
@@ -68,7 +94,7 @@ export default function FilterSidebar({
   setSelectedLocations,
 }: any) {
   return (
-    <div className="p-4 md:p-6 md:h-full lg:p-12 bg-gray-100 rounded w-full md:w-64 lg:w-85">
+    <div className="p-4 md:p-6 md:h-full lg:p-12 bg-gray-100 rounded w-full hidden md:block lg:w-85">
       <h2 className="text-lg md:text-xl font-semibold mb-4 text-blue-900">
         Filter by:
       </h2>
