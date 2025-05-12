@@ -12,6 +12,8 @@ export default function PeopleInfo({
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortByNameAsc, setSortByNameAsc] = useState(false);
+  const [sortByRelevance, setSortByRelevance] = useState(true);
+
   const peoplePerPage = 5;
 
   const lowerSearch = searchTerm.toLowerCase();
@@ -28,9 +30,23 @@ export default function PeopleInfo({
     return matchesLocation && matchesSearch;
   });
 
-  const sortedPeople = [...filteredPeople].sort((a, b) =>
-    sortByNameAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
-  );
+  const sortedPeople = [...filteredPeople].sort((a, b) => {
+    if (sortByRelevance) {
+      const score = (person: typeof a) =>
+        Object.values(person)
+          .filter((val) => typeof val === "string")
+          .reduce(
+            (acc, val) =>
+              acc + (val.toLowerCase().includes(lowerSearch) ? 1 : 0),
+            0
+          );
+      return score(b) - score(a); 
+    } else {
+      return sortByNameAsc
+        ? a.name.localeCompare(b.name)
+        : b.name.localeCompare(a.name);
+    }
+  });
 
   const totalPages = Math.ceil(sortedPeople.length / peoplePerPage);
 
@@ -50,8 +66,8 @@ export default function PeopleInfo({
 
   return (
     <div className="flex flex-col">
-      <div className="text-blue-900 font-medium border-b border-black pb-2 text-base sm:text-lg flex items-center justify-between">
-        <div>
+      <div className="font-medium border-b border-black pb-2 text-base sm:text-lg flex items-center justify-between">
+        <div className="text-blue-900">
           Results{" "}
           <span className="font-semibold">
             {startIndex + 1}-
@@ -60,43 +76,55 @@ export default function PeopleInfo({
           of {sortedPeople.length}
         </div>
 
-        <button
-          onClick={toggleSort}
-          className="text-olive-700 font-bold focus:outline-none flex items-center gap-1"
-        >
-          NAME
-          {sortByNameAsc ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 15l7-7 7 7"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          )}
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setSortByRelevance(true)}
+            className={`text-olive-700 hover:text-blue-900 font-bold focus:underline focus:underline-offset-15 decoration-2 cursor-pointer`}
+          >
+            RELEVANCE
+          </button>
+
+          <button
+            onClick={() => {
+              setSortByRelevance(false);
+              toggleSort();
+            }}
+            className={`text-olive-700 hover:text-blue-900 font-bold flex items-center gap-1 focus:underline focus:underline-offset-15 decoration-2 cursor-pointer`}
+          >
+            NAME
+            {sortByNameAsc ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 15l7-7 7 7"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
 
       {paginatedPeople.map((person, index) => (
@@ -107,19 +135,20 @@ export default function PeopleInfo({
           <img
             src="https://www.dlapiper.com/-/media/project/dlapiper-tenant/dlapiper/bio-images/j/john_gilluly_personality_web_crop.jpg?rev=-1"
             alt={person.name}
-            className="w-28 h-28 "
+            className="w-35 h-35 "
           />
 
           <div>
-      <h3 className="text-lg font-semibold text-blue-900">{person.name}</h3>
-            <p className="text-gray-700">{person.title}</p>
+            <h3 className="text-xl font-semibold text-blue-900">
+              {person.name}
+            </h3>
+            <p className="text-lg text-gray-700">{person.title}</p>
             <p className="text-sm text-gray-500">{person.location}</p>
             <p className="text-sm text-gray-500">{person.office}</p>
             <p className="text-sm text-gray-500">{person.capability}</p>
           </div>
         </div>
       ))}
-
 
       {totalPages > 1 && (
         <div className="flex flex-wrap justify-center mt-6 border-t pt-4 gap-3 items-center">
